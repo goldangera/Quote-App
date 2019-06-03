@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="container-fluid text-left">
+
+    <h1 class="quotesheader"><i><u>Quotes</u></i></h1>
+    <hr>
+    <div class="">
+      <div class="row">
+        <app-quote-form (addQuote)="addNewQuote($event)"></app-quote-form>
+      </div>
+
+      <div *ngFor='let quote of Quotes;let i = index'>
+        <p style="font-family: 'serif', sans-serif;" id="{{i}}" appStrikethrough><strong>{{quote.name}}</strong> submitted on: {{quote.completeDate|date|uppercase}}</p>
+
+        <!-- Toggle Button -->
+        <div style="width: 5px;"> <a href="#" class="btn btn-md danger" (click)='toggleDetails(i)'>SHOW-QUOTE</a> </div>
+
+        <div class="" *ngIf="quote.showDescription">
+          <app-quote-details class="text-left" *ngIf="quote.showDescription" [quote]='quote' (isComplete)='deleteQuote($event,i)'></app-quote-details>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
